@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>تحدي الجرافيك 30 يوم</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;700&family=Readex+Pro:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one narrow column, a progress strip on top, four week sections, each week keyed by its own swatch color like a palette card */
+:root {
+  --bg: #f3f4f7;
+  --surface: #ffffff;
+  --ink: #15182b;
+  --muted: #464b63;
+  --line: #dcdfe8;
+  --w1: #e8453c;
+  --w2: #f2a900;
+  --w3: #1f8f6b;
+  --w4: #3b4fd8;
+  --font-display: "Reem Kufi", "Readex Pro", system-ui, sans-serif;
+  --font-body: "Readex Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101220; --surface: #191c2e; --ink: #eceef8; --muted: #b6bbd2; --line: #2b2f47;
+    --w1: #ff6a60; --w2: #ffc23d; --w3: #3fc79a; --w4: #7c8cff;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101220; --surface: #191c2e; --ink: #eceef8; --muted: #b6bbd2; --line: #2b2f47;
+  --w1: #ff6a60; --w2: #ffc23d; --w3: #3fc79a; --w4: #7c8cff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 18px; line-height: 1.8;
+  padding-block: 28px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 680px; margin-inline: auto; display: flex; flex-direction: column; gap: 28px; }
+header { display: flex; flex-direction: column; gap: 14px; }
+.swatches { display: flex; gap: 6px; }
+.swatches i { width: 28px; height: 28px; border-radius: 50%; display: block; }
+.swatches i:nth-child(1) { background: var(--w1); }
+.swatches i:nth-child(2) { background: var(--w2); }
+.swatches i:nth-child(3) { background: var(--w3); }
+.swatches i:nth-child(4) { background: var(--w4); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 7vw, 2.8rem); line-height: 1.15; margin: 0; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0; font-size: 1.1rem; }
+.meter { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: flex; flex-direction: column; gap: 6px; }
+.meter-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 17px; color: var(--muted); }
+.meter-row b { font-family: var(--font-display); font-size: 1.4rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bar { height: 10px; border-radius: 6px; background: var(--line); display: flex; overflow: hidden; }
+.bar span { display: block; height: 100%; width: 0; transition: width .3s; }
+.bar span:nth-child(1) { background: var(--w1); }
+.bar span:nth-child(2) { background: var(--w2); }
+.bar span:nth-child(3) { background: var(--w3); }
+.bar span:nth-child(4) { background: var(--w4); }
+.week { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.week-head { display: flex; gap: 14px; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.chip { width: 44px; height: 44px; border-radius: 8px; flex: none; }
+.week-head h2 { font-family: var(--font-display); font-size: 1.55rem; margin: 0; line-height: 1.3; }
+.week-head small { color: var(--muted); font-variant-numeric: tabular-nums; }
+.week-head > div { min-width: 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+ul > li + li { border-top: 1px solid var(--line); }
+details { padding: 0 16px 14px; padding-inline-start: calc(16px + 26px + 12px); margin-top: -2px; }
+summary { cursor: pointer; font-size: 16px; font-weight: 500; color: var(--ink); width: fit-content; padding: 4px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); }
+summary:hover { border-color: var(--muted); }
+.fig { margin: 12px 0 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px; max-width: 400px; }
+.fig svg { display: block; width: 100%; height: auto; }
+.f1 { fill: var(--w1); } .f2 { fill: var(--w2); } .f3 { fill: var(--w3); } .f4 { fill: var(--w4); }
+.fi { fill: var(--ink); } .fs { fill: var(--surface); }
+.fm { fill: color-mix(in srgb, var(--ink) 20%, var(--surface)); }
+.ln { stroke: color-mix(in srgb, var(--ink) 30%, var(--surface)); stroke-width: 1.2; }
+.tx { fill: var(--ink); font-family: var(--font-body); } .tm { fill: var(--muted); font-family: var(--font-body); }
+.ar { stroke: var(--ink); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.dsh { fill: none; stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
+.stk { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+.tickc { fill: none; stroke: var(--w3); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+summary:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+details ol { margin: 8px 0 0; padding-inline-start: 1.3em; display: flex; flex-direction: column; gap: 10px; font-size: 18px; }
+details ol li::marker { color: var(--muted); font-variant-numeric: tabular-nums; }
+.tip { margin: 14px 0 0; font-size: 16.5px; color: var(--muted); border-inline-start: 3px solid var(--line); padding-inline-start: 10px; }
+.tip b { color: var(--ink); font-weight: 500; }
+#count, .week-head small { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.week-head small { font-size: 1rem; }
+label { display: flex; gap: 12px; align-items: flex-start; padding: 12px 16px; cursor: pointer; }
+label:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.day { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; width: 1.9em; flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
+.txt { flex: 1; min-width: 0; font-size: 1.1rem; font-weight: 500; }
+input[type=checkbox] { appearance: none; width: 26px; height: 26px; flex: none; margin: 5px 0 0; border: 2px solid var(--muted); border-radius: 6px; background: transparent; cursor: pointer; display: grid; place-content: center; }
+input[type=checkbox]::after { content: ""; width: 13px; height: 7px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: rotate(-45deg) translateY(-1px); opacity: 0; }
+input[type=checkbox]:checked::after { opacity: 1; }
+input[type=checkbox]:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.w1 input:checked { background: var(--w1); border-color: var(--w1); }
+.w2 input:checked { background: var(--w2); border-color: var(--w2); }
+.w3 input:checked { background: var(--w3); border-color: var(--w3); }
+.w4 input:checked { background: var(--w4); border-color: var(--w4); }
+.w1 .chip { background: var(--w1); } .w2 .chip { background: var(--w2); } .w3 .chip { background: var(--w3); } .w4 .chip { background: var(--w4); }
+input:checked ~ .txt { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 1px; }
+input:checked ~ .day { opacity: .5; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; font-size: 16px; color: var(--muted); }
+.tools span { border: 1px solid var(--line); border-radius: 999px; padding: 2px 12px; background: var(--surface); }
+footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+button { font: inherit; font-size: 16px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 6px 14px; cursor: pointer; }
+button:hover { border-color: var(--muted); }
+button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.today { background: var(--surface); border: 1px solid var(--line); border-top-width: 6px; border-radius: 12px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+.today.w1 { border-top-color: var(--w1); } .today.w2 { border-top-color: var(--w2); } .today.w3 { border-top-color: var(--w3); } .today.w4 { border-top-color: var(--w4); }
+.today small { color: var(--muted); font-size: 15px; }
+.today h2 { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.5; margin: 0; }
+.today h2 span { display: inline-block; background: var(--ink); color: var(--bg); border-radius: 8px; padding: 0 12px; margin-inline-end: 10px; font-variant-numeric: tabular-nums; }
+.today p { margin: 0; }
+.today ol { margin: 0; padding-inline-start: 1.3em; display: flex; flex-direction: column; gap: 10px; font-size: 18px; }
+.today .fig { margin: 0; }
+.today .tip { margin: 0; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+button.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 500; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { border: 1px dashed var(--line); border-radius: 999px; padding: 2px 14px; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.badge.on { border-style: solid; background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.badge.on.c1 { background: var(--w1); border-color: var(--w1); } .badge.on.c2 { background: var(--w2); border-color: var(--w2); color: #15182b; }
+.badge.on.c3 { background: var(--w3); border-color: var(--w3); } .badge.on.c4 { background: var(--w4); border-color: var(--w4); }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.links a, a.open { font-size: 16px; color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 2px 14px; text-decoration: none; background: var(--bg); }
+.links a:hover, a.open:hover { border-color: var(--muted); }
+.links a:focus-visible, a.open:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.mine { display: flex; flex-direction: column; gap: 4px; margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); }
+label.fl { display: block; padding: 6px 0 0; cursor: default; font-size: 15px; color: var(--muted); }
+label.fl:hover { background: none; }
+.mine textarea, .mine input { font: inherit; font-size: 16px; width: 100%; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+.mine textarea:focus-visible, .mine input:focus-visible { outline: 3px solid var(--ink); outline-offset: 1px; }
+.mine a.open { width: fit-content; margin-top: 6px; }
+.tools-line { margin: 0; color: var(--muted); font-size: 16px; }
+.next { font-size: 15px; color: var(--muted); align-self: center; }
+.sell { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px 16px; display: flex; flex-direction: column; gap: 12px; }
+.sell h2 { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.5; margin: 0; }
+.sell ol { margin: 0; padding-inline-start: 1.3em; display: flex; flex-direction: column; gap: 10px; }
+.sell .links, .sell .tip { margin: 0; }
+@media (prefers-reduced-motion: reduce) { .bar span { transition: none; } }
+</style>
+</head><body style="margin:0">
+<a href="./" style="display:block;padding:12px 16px;font:600 14px sans-serif;color:#3b4fd8;text-decoration:none">← رجوع للموقع</a>
+
+<div class="wrap" dir="rtl" lang="ar">
+  <header>
+    <div class="swatches" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <h1>تحدي الجرافيك 30 يوم</h1>
+    <p class="sub">30 إلى 60 دقيقة في اليوم. علّم على كل يوم كي تكملو.</p>
+    <p class="tools-line">الأدوات: Canva · Figma · coolors.co · Behance · Pinterest</p>
+    <div><button type="button" id="toggleAll">افتح كل الخطوات والصور</button></div>
+  </header>
+
+  <div class="meter" aria-live="polite">
+    <div class="meter-row"><span>تقدمك</span><b id="count">0 / 30</b></div>
+    <div class="bar" aria-hidden="true"><span id="b1"></span><span id="b2"></span><span id="b3"></span><span id="b4"></span></div>
+  </div>
+
+  <section id="today" class="today" aria-live="polite"></section>
+  <div id="badges" class="badges" aria-label="الشارات"></div>
+
+  <main id="weeks" class="wrap" style="gap:20px"></main>
+
+  <section class="sell" id="sell">
+    <h2>بعد الـ30 يوم: كيفاش تبيع تصاميمك</h2>
+    <ol>
+      <li>اختار منتج واحد: باك من 10 قوالب إنستغرام ولا باك لوغوات جاهزة.</li>
+      <li>اعمل صورة غلاف وصور معاينة (Mockup) واكتب وصف واضح لشنوة يلقى الحريف.</li>
+      <li>حط ثمن صغير في الأول، وبدلو كي تجيك طلبات.</li>
+      <li>انشر المنتج على Gumroad ولا Payhip، وشارك الرابط في إنستغرام وTikTok.</li>
+      <li>شوف التسجيل كمقاول ذاتي قبل ما تبدا تقبض من البيع.</li>
+    </ol>
+    <div class="links">
+      <a href="https://gumroad.com/" target="_blank" rel="noopener">Gumroad</a>
+      <a href="https://payhip.com/" target="_blank" rel="noopener">Payhip</a>
+      <a href="https://www.etsy.com/" target="_blank" rel="noopener">Etsy</a>
+      <a href="https://www.autoentrepreneur.tn/" target="_blank" rel="noopener">autoentrepreneur.tn</a>
+    </div>
+    <p class="tip">الجباية وطرق الخلاص تتبدل، تأكد من المواقع الرسمية قبل ما تبدا.</p>
+  </section>
+
+  <footer>
+    <span id="status">يتحفظ تقدمك تلقائيا.</span>
+    <button type="button" id="reset">أعد من الأول</button>
+  </footer>
+</div>
+
+<script>
+const WEEKS = [
+  { name: "الأسبوع 1: الأساسيات", tasks: [
+    "اختار 3 بوسترات تعجبك وحلل الألوان والخطوط",
+    "اعمل بالوتة من 3 ألوان في Canva (coolors.co تعاون)",
+    "اختار خطين وجرب كيفاش يتماشاو مع بعضهم",
+    "بوست بنص برك، بلا صور",
+    "عاود نفس البوست بمسافات أكبر",
+    "جرب المحاذاة: وسط، يمين، يسار، وشوف الفرق",
+    "راجع إلي صممتو وصور قبل/بعد للمحتوى" ] },
+  { name: "الأسبوع 2: التراتيب والتركيب", tasks: [
+    "تراتيب بصري: عنوان كبير، عنوان فرعي، نص",
+    "بوست إنستغرام لفكرة، اقتباس مثلا",
+    "استعمال الصور: اقتصاص وتركيب",
+    "بوستر لحدث وهمي",
+    "Story إنستغرام عمودي",
+    "غلاف يوتيوب (Thumbnail)",
+    "عاود تصميم قديم وحسنو" ] },
+  { name: "الأسبوع 3: الهوية واللوغو", tasks: [
+    "اختار براند وهمي: قهوة، مطعم...",
+    "ارسم 5 أفكار لوغو على الورقة",
+    "حول أحسن فكرة لـ Figma ولا Canva",
+    "اختار ألوان وخطوط البراند",
+    "بطاقة زيارة",
+    "بوست سوشيال ميديا بنفس الهوية",
+    "راجع الهوية كاملة" ] },
+  { name: "الأسبوع 4: البورتفوليو", tasks: [
+    "مشروع البراند (1/3): اللوغو",
+    "مشروع البراند (2/3): البوسترات",
+    "مشروع البراند (3/3): السوشيال ميديا",
+    "Mockup للتصاميم (placeit ولا Canva)",
+    "حضر حساب Behance",
+    "انشر المشروع مع شرح الفكرة",
+    "فيديو قصير: كيفاش صممت براند في أسبوع",
+    "خذ رأي ناس في تصاميمك وعدل",
+    "خطط للشهر الجاي: Figma ولا Illustrator" ] }
+];
+// Detailed how-to for each of the 30 days
+const STEPS = [
+  { s: ["افتح Pinterest واكتب poster design.", "احفظ 3 بوسترات تعجبك.", "لكل بوستر اكتب: شنوة الألوان؟ شنوة الخطوط؟ شنوة أول حاجة شدت عينك؟", "اكتب جملة وحدة: علاش يعجبني هذا البوستر؟"], tip: "اختار بوسترات بسيطة، موش المعقدة. البسيط أسهل في التحليل." },
+  { s: ["افتح coolors.co واضغط على Space باش يولد بالوتات.", "كي يعجبك لون، اضغط على القفل باش يبقى، وكمل الباقي.", "خذ 3 ألوان: واحد أساسي، واحد ثانوي، وواحد فاتح للخلفية.", "في Canva اعمل 3 مربعات بالألوان هذي، واكتب أكواد HEX متاعهم في ملاحظة."], tip: "كان اللون يعجبك على الشاشة، جربو على بوست كامل قبل ما تثبتو." },
+  { s: ["افتح fonts.google.com وشوف خطوط العناوين (قوية) وخطوط النص (واضحة).", "القاعدة السهلة: خط واحد serif وواحد sans-serif.", "في Canva اعمل صفحة فيها عنوان وفقرة، وجرب 3 أزواج مختلفة.", "اختار الزوج الأوضح وسجل اسمو."], tip: "خطين كافيين. كل ما تزيد خطوط، التصميم يولي فوضى." },
+  { s: ["في Canva اختار Instagram Post (1080×1080).", "اكتب اقتباس ولا جملة قصيرة.", "استعمل بالوتة اليوم الثاني وخطك.", "كبّر العنوان مرتين ولا 3 مرات من النص.", "بلا صور وبلا زخرفة. النص والألوان برك."], tip: "كان التصميم يخدم بالنص برك، يعني التراتيب صحيح." },
+  { s: ["افتح نسخة من بوست اليوم الي فات.", "كبّر الهوامش حتى 80px على الجوانب.", "زيد مسافة الأسطر لحوالي 1.4 ولا 1.5.", "حط النسختين بجنب بعضهم وشوف أي وحدة تتنفس أكثر."], tip: "المسافة الفارغة موش ضياع، هي تخلي العين ترتاح." },
+  { s: ["اعمل 3 نسخ من نفس البوست: نص في الوسط، نص على اليمين، ونص مختلط.", "في Canva استعمل Position ثم Align باش تضبط بدقة.", "شوف أي نسخة تحس بيها نظيفة أكثر.", "قاعدة: اختار محاذاة وحدة وكمل بيها في التصميم كامل."], tip: "المحاذاة العشوائية هي أول حاجة تخلي التصميم يبان هاوي." },
+  { s: ["حط تصاميم الأسبوع كلهم بجنب بعضهم.", "اكتب 3 حاجات تعلمتها و3 حاجات تحب تحسنها.", "اعمل صورة قبل/بعد: أول بوست مقابل أحسن بوست.", "احفظها، باش تستعملها في فيديو قصير."], tip: "الفرق بين أول وآخر تصميم هو أقوى محتوى تنجم تنشرو." },
+  { s: ["قسّم الصفحة لـ3 مستويات: عنوان، عنوان فرعي، نص.", "العنوان يكون الأكبر، والفرعي متوسط، والنص صغير.", "استعمل الوزن (bold) واللون مش الحجم برك.", "اختبار: كي تغمض عينيك نصف غمضة، العنوان لازم يبان أول."], tip: "كل صفحة فيها حاجة وحدة هي الأهم. أما كان كل شي مهم، ما فما حتى حاجة مهمة." },
+  { s: ["اختار اقتباس قصير (أقل من 12 كلمة).", "كبّر الكلمة المهمة وخليها بلون الأكسنت.", "حط اسم القائل صغير تحت.", "خلي مسافات كبيرة حول النص.", "صدّر بصيغة PNG."], tip: "جرب الاقتباس بجملة ديما شخصية منك، يعطي هوية." },
+  { s: ["نزل صورة من Unsplash ولا Pexels.", "اقتطع (Crop) الجزء المهم من الصورة.", "حط طبقة داكنة شفافة (حوالي 30 ولا 40%) باش النص يتقرا.", "حط النص في منطقة فارغة من الصورة."], tip: "تحقق من حقوق الصور قبل ما تبيع أي تصميم فيه صورة." },
+  { s: ["اختار حجم 1080×1350 ولا A3.", "اخترع اسم حدث وتاريخ ومكان.", "الاسم هو الأكبر، والتاريخ ثاني، والتفاصيل صغيرة.", "فعّل الأدلة (guides) في Canva باش ترتب العناصر على شبكة."], tip: "شوف بوسترات الحفلات الحقيقية: التاريخ والمكان لازم يتقراو من بعيد." },
+  { s: ["اختار حجم Story: 1080×1920.", "ما تحطش نص في أول 250px وآخر 250px (يتغطاو بواجهة إنستغرام).", "حط عنوان كبير ودعوة بسيطة (مثلا: اسحب).", "استعمل شكل ولا شريط باش تفصل بين العناصر."] },
+  { s: ["اختار حجم 1280×720.", "اكتب 3 ولا 4 كلمات كبار برك.", "حط عنصر وحيد واضح: وجه ولا صورة.", "اعتمد على تباين عالي بين النص والخلفية.", "صدّر وشوفو على تليفونك بحجم صغير. كان يتقرا، يخدم."], tip: "أغلبية الناس يشوفو الـThumbnail صغير. لازم يتقرا في حجم الإبهام." },
+  { s: ["اختار أضعف تصميم عملتو في الأسبوعين.", "اكتب 3 مشاكل فيه (ألوان؟ مسافات؟ تراتيب؟).", "صلح مشكل واحد في كل مرة، موش الكل مرة وحدة.", "حط القديم والجديد بجنب بعضهم."], tip: "هذا تمرين مهم: تعلم تشوف الأخطاء متاعك." },
+  { s: ["اختار نوع البراند: قهوة، مطعم، محل ملابس...", "اخترع اسم وجملة شعار.", "اكتب 3 كلمات تصف البراند (مثلا: دافي، عصري، شبابي).", "حدد من هو الزبون (العمر، الاهتمامات)."], tip: "الكلمات الثلاثة هي إلي تحكم على اختيار الألوان والخطوط." },
+  { s: ["خذ ورقة وقلم وارسم 5 مربعات صغيرة.", "في كل مربع فكرة مختلفة: نص برك، رمز، حرف أول، رمز مع نص، شكل بسيط.", "اعطي كل فكرة 10 دقايق، ما تزيدش.", "اختار الأبسط والأوضح."], tip: "أحسن لوغوات في العالم بسيطة. إذا يتصور بالقلم في ثواني، فهو قوي." },
+  { s: ["افتح Figma واعمل ملف جديد.", "ابني الشكل بأشكال بسيطة: Rectangle وEllipse.", "استعمل Union وSubtract باش تدمج الأشكال.", "زيد اسم البراند بالخط الي اخترتو.", "صدّر بصيغة SVG وPNG."], tip: "SVG يخلي اللوغو يكبر بلا ما تتغير جودتو." },
+  { s: ["اختار لون أساسي ولون ثانوي ولون محايد.", "اختار خطين: واحد للعناوين وواحد للنص.", "جرب اللوغو على خلفية بيضاء وسوداء وملونة.", "اكتب أكواد HEX وأسماء الخطوط في ملف."], tip: "إذا اللوغو ما يبانش على خلفية، ابني نسخة بلون آخر." },
+  { s: ["اعمل صفحة بحجم 90×50 مم.", "الوجه: اللوغو برك.", "الخلف: الاسم، الهاتف، الإيميل (4 معلومات على أكثر).", "خلي هامش أمان 3 مم من الحواف.", "صدّر PDF بدقة عالية."], tip: "المعلومات الكثيرة تخلي البطاقة تعبانة. الأقل أحسن." },
+  { s: ["استعمل نفس الألوان والخطوط الي اخترتهم.", "حط اللوغو في نفس الركن في كل بوست.", "اعمل 3 بوستات: عرض، اقتباس، منتج.", "حطهم بجنب بعضهم وشوف: يبانو من نفس البراند؟"], tip: "التناسق هو إلي يخلي البراند يتعرف." },
+  { s: ["اعمل صفحة وحدة (Brand Board) فيها: اللوغو، الألوان، الخطوط.", "حط أمثلة صغيرة: بطاقة وبوست.", "اكتب 3 قواعد: وين يتحط اللوغو، شنوة الألوان المسموحة، شنوة الخطوط.", "صدّرها PNG."] },
+  { s: ["نظف النسخة النهائية من اللوغو.", "اعمل نسخ: ملونة، أبيض وأسود، أفقية، مربعة.", "خلي مسافة فارغة حول اللوغو.", "صدّر كل نسخة بخلفية شفافة (PNG)."], tip: "ما تحطش فقط نسخة وحدة في البورتفوليو. العملاء يحبو يشوفو كل الاستعمالات." },
+  { s: ["اعمل بوسترين بنفس الهوية.", "استعمل نفس التراتيب البصري الي تعلمتو.", "تأكد من الخطوط والألوان والمحاذاة.", "صدّر بجودة عالية."] },
+  { s: ["اعمل 3 بوستات، وStory، وكفر لصفحة.", "حط اللوغو في نفس المكان.", "شوف التناسق بينهم كلهم في صفحة وحدة.", "صدّر كل شي."] },
+  { s: ["افتح placeit.net ولا Canva Mockups.", "ابحث عن كباية، تي-شرت، بطاقة، وشنطة.", "حط اللوغو والتصاميم عليهم.", "اختار 3 ولا 4 صور بجودة عالية."], tip: "المقاسات الي تظهر الشغل في استعمال حقيقي تقنع العميل أكثر." },
+  { s: ["افتح حساب على behance.net.", "حط صورة واسم واضح وbio قصير (من أنت وشنوة تعمل).", "زيد رابط إنستغرام.", "شوف 3 بورتفوليوهات لمصممين وتعلم كيفاش ينظمو شغلهم."] },
+  { s: ["اعمل Project جديد في Behance.", "الكفر: صورة قوية من المشروع.", "اكتب 3 فقرات قصيرة: المشكلة، الفكرة، النتيجة.", "رتب الصور بالتسلسل.", "زيد Tags مناسبة (branding, logo, social media)."], tip: "العميل ما يقراش برشا. الصور هي إلي تحكي." },
+  { s: ["سجل شاشتك وأنت تصمم (30 ولا 45 ثانية).", "في CapCut سرّع الفيديو وزيد قبل/بعد.", "أول 3 ثواني: جملة تشد (مثلا: صممت براند في أسبوع).", "زيد موسيقى ونص قصير.", "انشر على TikTok وReels."], tip: "ما تستناش الكمال. أول فيديو هو للتعلم." },
+  { s: ["ابعث تصاميمك لـ5 ناس.", "اسألهم 3 أسئلة: شنوة أول حاجة لاحظتها؟ شنوة موش واضح؟ شنوة تبدل؟", "كتب الأجوبة.", "عدل 2 ولا 3 حاجات تتكرر في الآراء."], tip: "ما تاخذش كل رأي. الي يتكرر عند أكثر من واحد هو الي يهم." },
+  { s: ["قرر: Figma ولا Illustrator للشهر الجاي.", "اكتب 3 أهداف (مثلا: 4 لوغوات، براند وحدة، باك قوالب).", "حدد مشروع لكل أسبوع.", "فكر في أول منتج تنجم تبيعو (باك قوالب Canva مثلا)."] }
+];
+// Small SVG illustrations, one per day (viewBox 240x130). First item of a sequence sits on the right (RTL).
+const R = (x, y, w, h, c, rx = 3, o = "") => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" class="${c}" ${o}/>`;
+const C = (x, y, r, c) => `<circle cx="${x}" cy="${y}" r="${r}" class="${c}"/>`;
+const T = (x, y, s, sz = 12, c = "tx", w = 500) => `<text x="${x}" y="${y}" text-anchor="middle" font-size="${sz}" font-weight="${w}" class="${c}">${s}</text>`;
+const LN = (x, y, w, n, c = "fm", gap = 9, h = 4) => Array.from({ length: n }, (_, i) => R(x, y + i * gap, i === n - 1 ? w * 0.6 : w, h, c, 2)).join("");
+const AR = (x1, y, x2) => { const s = x1 > x2 ? 1 : -1; return `<path d="M${x1} ${y}H${x2}M${x2 + 6 * s} ${y - 5}L${x2} ${y}L${x2 + 6 * s} ${y + 5}" class="ar"/>`; };
+const PH = (x, y, w, h, extra = "") => R(x, y, w, h, "fs ln", 4) + extra;
+const FIG = [
+  /* 1 */ () => PH(150, 8, 70, 114, R(158, 18, 54, 8, "fi", 2) + R(158, 32, 54, 36, "f1", 3) + LN(158, 76, 54, 4, "fm", 9, 4)) + C(25, 30, 7, "f1") + C(41, 30, 7, "f4") + T(95, 35, "الألوان", 14) + T(32, 76, "Aa", 22, "tx", 700) + T(95, 76, "الخطوط", 14) + C(32, 108, 8, "stk") + C(32, 108, 2.5, "fi") + T(92, 113, "أول حاجة تشوفها", 12),
+  /* 2 */ () => R(15, 12, 64, 70, "f1", 6) + R(88, 12, 64, 70, "f4", 6) + R(161, 12, 64, 70, "fs ln", 6) + T(47, 102, "أساسي", 13) + T(120, 102, "ثانوي", 13) + T(193, 102, "فاتح", 13) + T(120, 124, "3 ألوان برك", 12, "tm"),
+  /* 3 */ () => R(12, 10, 104, 84, "fs ln", 6) + R(124, 10, 104, 84, "fs ln", 6) + T(176, 62, "Aa", 44, "tx", 700) + T(64, 60, "Aa", 28, "tx", 300) + T(176, 84, "عناوين", 12, "tm") + T(64, 84, "نص", 12, "tm") + T(120, 118, "خطين برك", 13, "tm"),
+  /* 4 */ () => PH(55, 4, 130, 122, R(70, 20, 100, 12, "fi", 2) + R(70, 40, 64, 7, "f1", 2) + LN(70, 62, 100, 5, "fm", 11, 5)),
+  /* 5 */ () => PH(125, 6, 105, 100, LN(130, 14, 95, 9, "fm", 10, 5)) + PH(10, 6, 105, 100, '<rect x="28" y="22" width="69" height="68" class="dsh"/>' + LN(32, 28, 61, 5, "fm", 13, 5)) + T(177, 122, "ضيق", 13) + T(62, 122, "مريح", 13),
+  /* 6 */ () => [[8, "c", "وسط"], [86, "r", "يمين"], [164, "m", "فوضى"]].map(([x, a, l]) => {
+    const offs = a === "c" ? [9, 14, 11, 19] : a === "r" ? [10, 20, 14, 30] : [8, 26, 4, 22]; const ws = [50, 40, 46, 30];
+    return PH(x, 4, 68, 96, ws.map((w, i) => R(x + offs[i], 16 + i * 18, w, i === 0 ? 8 : 5, i === 0 ? "fi" : "fm", 2)).join("")) + T(x + 34, 120, l, 13);
+  }).join(""),
+  /* 7 */ () => PH(135, 8, 95, 100, R(145, 20, 75, 6, "fm", 2) + LN(145, 36, 75, 5, "fm", 10, 4)) + T(182, 124, "قبل", 13) + PH(10, 8, 95, 100, R(20, 18, 75, 28, "f1", 3) + R(20, 54, 75, 8, "fi", 2) + LN(20, 70, 75, 3, "fm", 9, 4)) + T(57, 124, "بعد", 13) + AR(131, 58, 109),
+  /* 8 */ () => R(63, 12, 165, 28, "fi", 3) + R(113, 50, 115, 18, "f1", 3) + LN(63, 78, 165, 3, "fm", 11, 5) + T(30, 32, "عنوان", 13) + T(30, 64, "فرعي", 13) + T(30, 92, "نص", 13) + T(120, 122, "3 مستويات", 12, "tm"),
+  /* 9 */ () => PH(60, 4, 120, 122, T(120, 74, "“", 76, "f1", 700).replace('class="f1"', 'class="f1"') + R(85, 80, 70, 6, "fi", 2) + R(95, 92, 50, 6, "fi", 2) + R(100, 110, 40, 4, "f1", 2)),
+  /* 10 */ () => R(40, 6, 160, 118, "f3", 6) + R(40, 6, 160, 118, "fi", 6, 'opacity=".35"') + R(60, 40, 120, 12, "fs", 2) + R(75, 60, 90, 12, "fs", 2) + R(95, 88, 50, 5, "fs", 2, 'opacity=".8"'),
+  /* 11 */ () => PH(75, 3, 90, 124, R(85, 12, 70, 16, "fi", 2) + R(85, 36, 70, 28, "f2", 2) + LN(85, 72, 70, 3, "fm", 8, 4) + R(85, 100, 40, 10, "f1", 2) + '<path d="M120 3V127M75 65H165" class="dsh"/>'),
+  /* 12 */ () => PH(85, 3, 70, 124, R(85, 3, 70, 22, "f1", 4, 'opacity=".35"') + R(85, 105, 70, 22, "f1", 4, 'opacity=".35"') + R(95, 50, 50, 10, "fi", 2) + R(95, 66, 35, 6, "fm", 2) + R(100, 84, 40, 10, "f4", 5)) + T(40, 18, "ممنوع", 12, "tm") + T(40, 118, "ممنوع", 12, "tm") + T(200, 18, "250px", 12, "tm") + T(200, 118, "250px", 12, "tm"),
+  /* 13 */ () => R(20, 9, 200, 112, "f2", 6) + R(150, 24, 56, 14, "fi", 2) + R(160, 46, 46, 14, "fi", 2) + R(170, 68, 36, 14, "fi", 2) + C(65, 62, 22, "f1") + C(65, 56, 10, "fs") + '<path d="M47 96Q65 74 83 96Z" class="fs"/>',
+  /* 14 */ () => PH(130, 12, 100, 100, R(140, 22, 40, 30, "f1", 2, 'transform="rotate(8 160 37)"') + R(165, 60, 50, 12, "f2", 2) + R(142, 80, 30, 22, "f4", 2) + R(185, 85, 34, 18, "fm", 2)) + T(180, 128, "قبل", 12) + PH(10, 12, 100, 100, R(22, 24, 76, 10, "fi", 2) + R(22, 42, 50, 6, "f1", 2) + LN(22, 60, 76, 4, "fm", 10, 4)) + T(60, 128, "بعد", 12) + AR(126, 62, 114),
+  /* 15 */ () => T(120, 26, "3 كلمات = هوية البراند", 14, "tm") + R(163, 44, 62, 36, "fs ln", 18) + T(194, 68, "دافي", 14) + R(89, 44, 62, 36, "fs ln", 18) + T(120, 68, "عصري", 14) + R(15, 44, 62, 36, "fs ln", 18) + T(46, 68, "شبابي", 14) + C(100, 108, 8, "f1") + C(120, 108, 8, "f2") + C(140, 108, 8, "f4"),
+  /* 16 */ () => [0, 1, 2, 3, 4].map(i => PH(8 + i * 46, 28, 40, 40)).join("") + T(28, 56, "K", 24, "tx", 700) + C(74, 48, 12, "f1") + R(108, 36, 24, 24, "f3", 3) + '<polygon points="166,36 180,60 152,60" class="f2"/>' + C(212, 44, 8, "f1") + R(200, 56, 24, 5, "fi", 2) + [0, 1, 2, 3, 4].map(i => T(28 + i * 46, 86, i + 1, 13, "tm")).join("") + T(120, 116, "ارسم 5 أفكار، اختار الأبسط", 13, "tm"),
+  /* 17 */ () => R(150, 35, 50, 50, "stk", 4) + C(205, 60, 28, "stk") + T(190, 112, "قبل", 13) + R(15, 35, 50, 50, "f1", 4) + C(65, 60, 28, "f1") + T(54, 112, "Union", 13) + AR(132, 60, 108),
+  /* 18 */ () => R(8, 14, 66, 66, "fs ln", 6) + C(41, 47, 16, "f1") + R(87, 14, 66, 66, "fi", 6) + C(120, 47, 16, "fs") + R(166, 14, 66, 66, "f2", 6) + C(199, 47, 16, "fi") + T(41, 100, "فاتح", 13) + T(120, 100, "غامق", 13) + T(199, 100, "ملون", 13) + T(120, 124, "جرب اللوغو على 3 خلفيات", 12, "tm"),
+  /* 19 */ () => PH(128, 18, 100, 56, C(178, 46, 12, "f1") + '<rect x="131" y="21" width="94" height="50" rx="2" class="dsh"/>') + PH(12, 18, 100, 56, R(24, 28, 40, 6, "fi", 2) + LN(24, 42, 50, 3, "fm", 9, 4) + '<rect x="15" y="21" width="94" height="50" rx="2" class="dsh"/>') + T(178, 94, "الوجه", 13) + T(62, 94, "الظهر", 13) + T(120, 120, "90 × 50 مم", 13, "tm"),
+  /* 20 */ () => [[8, "f1"], [86, "f4"], [164, "f2"]].map(([x, c]) => PH(x, 6, 68, 100, C(x + 56, 18, 6, "f1") + R(x + 8, 34, 52, 34, c, 3) + LN(x + 8, 78, 52, 3, "fm", 9, 4))).join("") + T(120, 124, "نفس اللوغو في نفس المكان", 12, "tm"),
+  /* 21 */ () => PH(15, 8, 210, 100, C(185, 45, 24, "f1") + R(160, 78, 50, 5, "fi", 2) + C(45, 30, 7, "f1") + C(63, 30, 7, "f2") + C(81, 30, 7, "f4") + C(99, 30, 7, "f3") + T(70, 84, "Aa", 28, "tx", 700) + R(120, 60, 24, 36, "fm", 3)) + T(120, 126, "صفحة وحدة فيها كل شي", 12, "tm"),
+  /* 22 */ () => PH(178, 20, 52, 52, C(204, 46, 14, "f1")) + PH(122, 20, 52, 52, C(148, 46, 14, "fi")) + PH(66, 20, 52, 52, C(80, 46, 6, "f1") + R(88, 42, 20, 8, "fi", 2)) + R(10, 20, 52, 52, "fi", 4) + C(36, 46, 14, "fs") + T(204, 92, "ملون", 12) + T(148, 92, "أبيض وأسود", 12) + T(92, 92, "أفقي", 12) + T(36, 92, "معكوس", 12) + T(120, 120, "4 نسخ من اللوغو", 13, "tm"),
+  /* 23 */ () => [[130, "f1"], [50, "f4"]].map(([x, c]) => PH(x, 8, 60, 100, R(x + 8, 16, 44, 10, "fi", 2) + R(x + 8, 34, 44, 34, c, 3) + LN(x + 8, 76, 44, 3, "fm", 8, 4))).join("") + T(120, 126, "نفس التراتيب في الاثنين", 12, "tm"),
+  /* 24 */ () => PH(160, 54, 64, 64, C(174, 68, 6, "f1") + R(172, 84, 48, 28, "f1", 3)) + PH(92, 29, 50, 89, C(105, 42, 6, "f1") + R(100, 60, 40, 40, "f1", 3)) + PH(8, 75, 76, 43, C(22, 88, 6, "f1") + R(32, 86, 44, 8, "fi", 2) + R(32, 100, 30, 6, "fm", 2)) + T(120, 14, "بوست + ستوري + كفر", 13, "tm"),
+  /* 25 */ () => R(80, 28, 72, 76, "f1", 10) + '<path d="M152 46H166Q182 46 182 66Q182 86 166 86H152" class="stk" style="stroke:var(--w1);stroke-width:7"/>' + C(116, 66, 14, "fs") + C(116, 66, 5, "fi") + PH(14, 66, 48, 32, C(38, 82, 7, "f1")).replace('class="fs ln"', 'class="fs ln" transform="rotate(-8 38 82)"') + T(120, 124, "Mockup", 13, "tm"),
+  /* 26 */ () => C(190, 36, 22, "f4") + R(40, 26, 110, 9, "fi", 2) + LN(40, 44, 110, 2, "fm", 10, 5) + R(14, 78, 66, 44, "f1", 4) + R(87, 78, 66, 44, "f2", 4) + R(160, 78, 66, 44, "f3", 4),
+  /* 27 */ () => R(20, 6, 200, 36, "f4", 4) + R(172, 52, 48, 34, "f2", 3) + R(118, 52, 48, 34, "f3", 3) + LN(20, 56, 90, 4, "fm", 9, 4) + R(20, 96, 200, 26, "f1", 3),
+  /* 28 */ () => PH(85, 3, 70, 124, C(120, 55, 16, "f1") + '<path d="M125 48L112 55L125 62Z" class="fs"/>' + R(95, 92, 50, 4, "fm", 2) + R(95, 92, 20, 4, "f1", 2) + C(115, 94, 4, "f1") + T(120, 114, "قبل / بعد", 10, "tm")) + T(40, 60, "أول 3 ثواني", 12, "tm") + T(200, 60, "30-45 ثانية", 12, "tm"),
+  /* 29 */ () => R(120, 14, 108, 44, "fs ln", 10) + '<path d="M205 58L216 72L195 58Z" class="fs ln"/>' + T(174, 41, "شنوة موش واضح؟", 12) + R(12, 72, 108, 44, "f3", 10) + '<path d="M30 72L22 60L46 72Z" class="f3"/>' + R(28, 86, 76, 5, "fs", 2) + R(28, 98, 56, 5, "fs", 2),
+  /* 30 */ () => [14, 50, 86].map((y, i) => R(190, y, 28, 28, "stk", 6) + (i < 2 ? `<path d="M196 ${y + 15}L202 ${y + 21}L212 ${y + 8}" class="tickc"/>` : "") + R(40, y + 10, 130, 8, "fm", 3)).join("") + T(120, 126, "3 أهداف للشهر الجاي", 12, "tm")
+];
+// Lesson links: [YouTube search, Pinterest search or null, tool name, tool url]. Search links only, so nothing breaks.
+const LINKS = [
+  ["how to analyze a poster design", "poster design inspiration"],
+  ["how to choose a color palette graphic design", "color palette inspiration", "Coolors", "https://coolors.co/"],
+  ["font pairing for beginners", "font pairing", "Google Fonts", "https://fonts.google.com/"],
+  ["typography only instagram post canva tutorial", "typographic poster"],
+  ["white space in graphic design", "minimal layout design"],
+  ["text alignment graphic design basics", "clean layout design grid"],
+  ["graphic design before and after redesign", "design before and after"],
+  ["visual hierarchy in graphic design", "visual hierarchy poster"],
+  ["quote post design canva tutorial", "quote post design instagram", "Canva", "https://www.canva.com/"],
+  ["text over image design overlay tutorial", "text over photo design", "Unsplash", "https://unsplash.com/"],
+  ["event poster design tutorial", "event poster design"],
+  ["instagram story design tutorial safe zone", "instagram story design"],
+  ["youtube thumbnail design tutorial", "youtube thumbnail design"],
+  ["redesign your old design portfolio improvement", "design redesign"],
+  ["brand identity basics for beginners", "brand identity design coffee shop"],
+  ["logo sketching process thumbnails", "logo sketches ideas"],
+  ["figma logo design tutorial for beginners", null, "Figma", "https://www.figma.com/"],
+  ["how to choose brand colors and fonts", "brand style guide"],
+  ["business card design tutorial", "minimal business card design"],
+  ["instagram feed branding consistent design", "instagram feed branding"],
+  ["how to create a brand board", "brand board design"],
+  ["logo variations and how to export logo files", "logo variations"],
+  ["poster series design consistent layout", "poster series design"],
+  ["social media branding kit design", "social media branding kit"],
+  ["mockup design tutorial branding", null, "Placeit", "https://placeit.net/"],
+  ["how to set up a behance portfolio", null, "Behance", "https://www.behance.net/"],
+  ["behance project case study how to present", "branding case study design"],
+  ["capcut tutorial for beginners", null, "CapCut", "https://www.capcut.com/"],
+  ["how to get design feedback and improve", null],
+  ["graphic design roadmap for beginners", "freelance graphic designer portfolio"]
+];
+const yt = q => "https://www.youtube.com/results?search_query=" + encodeURIComponent(q);
+const pin = q => "https://www.pinterest.com/search/pins/?q=" + encodeURIComponent(q);
+function linksHtml(d) {
+  const L = LINKS[d - 1]; if (!L) return "";
+  let h = `<div class="links"><a href="${yt(L[0])}" target="_blank" rel="noopener">فيديو يشرح</a>`;
+  if (L[1]) h += `<a href="${pin(L[1])}" target="_blank" rel="noopener">أمثلة على Pinterest</a>`;
+  if (L[2]) h += `<a href="${L[3]}" target="_blank" rel="noopener">${L[2]}</a>`;
+  return h + "</div>";
+}
+function mineHtml(d) {
+  return `<div class="mine"><label class="fl" for="note-${d}">ملاحظتك</label><textarea id="note-${d}" data-d="${d}" rows="2" dir="auto" placeholder="شنوة تعلمت؟ شنوة صعب عليك؟"></textarea><label class="fl" for="link-${d}">رابط تصميمك (Canva أو Figma أو Behance)</label><input id="link-${d}" data-d="${d}" type="url" inputmode="url" dir="ltr" placeholder="https://..."><a class="open" id="open-${d}" target="_blank" rel="noopener" hidden>افتح تصميمك</a></div>`;
+}
+const TASKS = WEEKS.flatMap((w, wi) => w.tasks.map(t => ({ t, wi })));
+let meta = { at: {}, notes: {} };
+const todayStr = () => new Date().toLocaleDateString("en-CA");
+function streak() {
+  const days = new Set(Object.values(meta.at));
+  const dt = new Date();
+  if (!days.has(dt.toLocaleDateString("en-CA"))) dt.setDate(dt.getDate() - 1);
+  let n = 0;
+  while (days.has(dt.toLocaleDateString("en-CA"))) { n++; dt.setDate(dt.getDate() - 1); }
+  return n;
+}
+function renderExtras(total) {
+  const el = document.getElementById("today");
+  let d = 0;
+  for (let i = 1; i <= 30; i++) { if (!state[i]) { d = i; break; } }
+  if (!d) {
+    el.className = "today";
+    el.innerHTML = "<h2>كملت التحدي، مبروك!</h2><p>خطوتك الجاية: ابني أول منتج للبيع من تصاميمك.</p>";
+  } else {
+    const k = TASKS[d - 1], info = STEPS[d - 1];
+    el.className = "today w" + (k.wi + 1);
+    el.innerHTML = `<small>يومك اليوم</small><h2><span>${d}</span>${k.t}</h2><figure class="fig" role="img" aria-label="رسم توضيحي"><svg viewBox="0 0 240 130" aria-hidden="true">${FIG[d - 1]()}</svg></figure><ol>${info.s.map(x => `<li>${x}</li>`).join("")}</ol>${info.tip ? `<p class="tip"><b>نصيحة:</b> ${info.tip}</p>` : ""}${linksHtml(d)}<div class="row"><button type="button" class="primary" data-act="done" data-d="${d}">كملتها</button><button type="button" data-act="go" data-d="${d}">افتحها في القائمة</button></div>`;
+  }
+  const s = streak();
+  const wk = WEEKS.map((w, wi) => boxes.filter(b => +b.dataset.w === wi).every(b => state[b.dataset.d]));
+  const items = [["سلسلة " + s + " يوم", s >= 1, ""], ["أول يوم", total >= 1, ""]]
+    .concat(wk.map((ok, i) => ["الأسبوع " + (i + 1), ok, "c" + (i + 1)]))
+    .concat([["10 أيام", total >= 10, ""], ["20 يوم", total >= 20, ""], ["30 يوم", total >= 30, ""]]);
+  const next = total < 10 ? ["10 أيام", 10 - total] : total < 20 ? ["20 يوم", 20 - total] : total < 30 ? ["30 يوم", 30 - total] : null;
+  document.getElementById("badges").innerHTML = items.filter(i => i[1]).map(([t, on, c]) => `<span class="badge on ${c}">${t}</span>`).join("")
+    + (next ? `<span class="next">الشارة الجاية: ${next[0]} (باقي ${next[1]})</span>` : "");
+}
+function showOpen(d, v) {
+  const a = document.getElementById("open-" + d); if (!a) return;
+  try { const u = new URL(v); if (u.protocol === "https:" || u.protocol === "http:") { a.href = u.href; a.hidden = false; return; } } catch (e) {}
+  a.hidden = true;
+}
+function fillNotes() {
+  for (let d = 1; d <= 30; d++) {
+    const n = meta.notes[d] || {};
+    const ta = document.getElementById("note-" + d), li = document.getElementById("link-" + d);
+    if (ta && document.activeElement !== ta) ta.value = n.n || "";
+    if (li && document.activeElement !== li) li.value = n.l || "";
+    showOpen(d, n.l);
+  }
+}
+let state = {};
+const LS = "graphic30";
+const weeksEl = document.getElementById("weeks");
+let day = 0;
+WEEKS.forEach((w, wi) => {
+  const sec = document.createElement("section");
+  sec.className = "week w" + (wi + 1);
+  const items = w.tasks.map(t => {
+    day++;
+    const info = STEPS[day - 1];
+    const det = info ? `<details><summary>كيفاش نعملها؟ (مع صورة)</summary><figure class="fig" role="img" aria-label="رسم توضيحي لليوم ${day}"><svg viewBox="0 0 240 130" aria-hidden="true">${FIG[day - 1]()}</svg></figure><ol>${info.s.map(x => `<li>${x}</li>`).join("")}</ol>${info.tip ? `<p class="tip"><b>نصيحة:</b> ${info.tip}</p>` : ""}${linksHtml(day)}${mineHtml(day)}</details>` : "";
+    return `<li><label><input type="checkbox" data-d="${day}" data-w="${wi}"><span class="day">${day}</span><span class="txt">${t}</span></label>${det}</li>`;
+  }).join("");
+  sec.innerHTML = `<div class="week-head"><div class="chip" aria-hidden="true"></div><div><h2>${w.name}</h2><small id="wc${wi}"></small></div></div><ul>${items}</ul>`;
+  weeksEl.appendChild(sec);
+});
+const boxes = [...document.querySelectorAll("input[type=checkbox]")];
+function render() {
+  let total = 0;
+  WEEKS.forEach((w, wi) => {
+    const bs = boxes.filter(b => +b.dataset.w === wi);
+    const n = bs.filter(b => state[b.dataset.d]).length;
+    total += n;
+    document.getElementById("wc" + wi).textContent = n + " / " + bs.length;
+    document.getElementById("b" + (wi + 1)).style.width = (bs.length / 30 * 100 * n / bs.length) + "%";
+  });
+  document.getElementById("count").textContent = total + " / 30";
+  renderExtras(total);
+}
+function apply() { boxes.forEach(b => b.checked = !!state[b.dataset.d]); render(); fillNotes(); }
+
+let dbDoc = null;
+function lsRead() { try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) { return {}; } }
+function lsWrite() { try { localStorage.setItem(LS, JSON.stringify({ done: state, at: meta.at, notes: meta.notes })); } catch (e) {} }
+let timer;
+function save() {
+  lsWrite();
+  clearTimeout(timer);
+  timer = setTimeout(async () => {
+    if (!dbDoc) return;
+    try { await dbDoc.set({ done: state, at: meta.at, notes: meta.notes }); } catch (e) {}
+  }, 400);
+}
+boxes.forEach(b => b.addEventListener("change", () => {
+  state[b.dataset.d] = b.checked;
+  if (b.checked) meta.at[b.dataset.d] = todayStr(); else delete meta.at[b.dataset.d];
+  render(); save();
+}));
+weeksEl.addEventListener("input", e => {
+  const t = e.target;
+  if (!t.dataset || !t.dataset.d || t.type === "checkbox") return;
+  const d = t.dataset.d;
+  meta.notes[d] = { n: document.getElementById("note-" + d).value, l: document.getElementById("link-" + d).value.trim() };
+  showOpen(d, meta.notes[d].l); save();
+});
+document.getElementById("today").addEventListener("click", e => {
+  const btn = e.target.closest("button[data-act]"); if (!btn) return;
+  const box = boxes[+btn.dataset.d - 1];
+  if (btn.dataset.act === "done") { box.checked = true; box.dispatchEvent(new Event("change")); }
+  else { const li = box.closest("li"); li.querySelector("details").open = true; li.scrollIntoView({ behavior: "smooth", block: "center" }); }
+});
+document.getElementById("reset").addEventListener("click", function () {
+  if (this.dataset.armed) { state = {}; meta = { at: {}, notes: {} }; delete this.dataset.armed; this.textContent = "أعد من الأول"; apply(); save(); return; }
+  this.dataset.armed = "1"; this.textContent = "اضغط مرة أخرى للتأكيد";
+  setTimeout(() => { delete this.dataset.armed; this.textContent = "أعد من الأول"; }, 3000);
+});
+{
+  const raw = lsRead();
+  if (raw.done) { state = raw.done; meta.at = raw.at || {}; meta.notes = raw.notes || {}; } else { state = raw; }
+}
+apply();
+const toggleAll = document.getElementById("toggleAll");
+toggleAll.addEventListener("click", () => {
+  const all = [...document.querySelectorAll("details")];
+  const open = all.some(d => !d.open);
+  all.forEach(d => d.open = open);
+  toggleAll.textContent = open ? "سكّر كل الخطوات" : "افتح كل الخطوات والصور";
+});
+
+(async () => {
+  try {
+    const [db, user] = await Promise.all([window.claude?.use("db"), window.claude?.use("user")]);
+    if (!db || !user) return;
+    const id = await user.id();
+    if (!id) return;
+    dbDoc = db.collection("data/users/" + id).doc("progress");
+    const snap = await dbDoc.get();
+    if (snap.exists) {
+      const d = snap.data();
+      state = Object.assign({}, state, d.done || {});
+      meta.at = Object.assign({}, meta.at, d.at || {});
+      meta.notes = Object.assign({}, meta.notes, d.notes || {});
+      apply(); lsWrite();
+    }
+  } catch (e) { dbDoc = null; }
+})();
+</script>
+</body></html>
