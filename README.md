@@ -2,7 +2,7 @@
 Design in 30 day
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head>
+<head><meta name="google-site-verification" content="x7ADTzs2FLzhZwfVxhMcu8G9FcS37cTlAqYBhJ6xbL0" />
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Design in 30 days | تعلم الجرافيك في 30 يوم بالدارجة التونسية</title>
