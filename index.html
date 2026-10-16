@@ -1,350 +1,170 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10101b">
-  <meta name="description" content="تعلم التصميم الغرافيكي من الصفر في 30 يوم مع Arbi Design.">
-  <title>Arbi Design | تعلّم التصميم</title>
-
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0c0c14;
-      --card: #171725;
-      --purple: #9b72ff;
-      --blue: #52c5ff;
-      --text: #f7f5ff;
-      --muted: #aaa8bd;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Tahoma, sans-serif;
-      line-height: 1.8;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      width: min(1100px, 90%);
-      margin: auto;
-    }
-
-    header {
-      border-bottom: 1px solid #ffffff12;
-      background: #0c0c14ee;
-    }
-
-    nav {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      padding: 12px 0;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .logo span { color: var(--purple); }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .nav-links a:hover { color: white; }
-
-    .hero {
-      padding: 85px 0 75px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 0%, #7546d933, transparent 60%);
-    }
-
-    .tag {
-      display: inline-block;
-      border: 1px solid #9b72ff66;
-      color: #c5afff;
-      background: #9b72ff12;
-      padding: 5px 15px;
-      border-radius: 30px;
-      font-size: 13px;
-      margin-bottom: 24px;
-    }
-
-    h1 {
-      font-size: clamp(36px, 7vw, 66px);
-      line-height: 1.3;
-      margin-bottom: 20px;
-      font-weight: 900;
-    }
-
-    .gradient {
-      background: linear-gradient(90deg, var(--purple), var(--blue));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 620px;
-      margin: 0 auto 28px;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      border-radius: 12px;
-      background: linear-gradient(110deg, #9b72ff, #6e83ff);
-      color: white;
-      font-weight: bold;
-      transition: transform .2s;
-    }
-
-    .btn:hover { transform: translateY(-3px); }
-
-    .secondary {
-      background: #ffffff0a;
-      border: 1px solid #ffffff24;
-      margin-right: 8px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      max-width: 650px;
-      margin: 55px auto 0;
-    }
-
-    .stat {
-      padding: 18px 8px;
-      border: 1px solid #ffffff12;
-      background: #ffffff06;
-      border-radius: 16px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 25px;
-      color: var(--blue);
-    }
-
-    .stat span {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    section { padding: 65px 0; }
-
-    .section-head {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-
-    .section-head h2 {
-      font-size: clamp(25px, 5vw, 36px);
-      margin-bottom: 8px;
-    }
-
-    .section-head p { color: var(--muted); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid #ffffff12;
-      border-radius: 18px;
-      padding: 25px;
-      transition: border-color .2s, transform .2s;
-    }
-
-    .card:hover {
-      border-color: #9b72ff88;
-      transform: translateY(-4px);
-    }
-
-    .icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 14px;
-      background: #9b72ff19;
-      font-size: 24px;
-      margin-bottom: 15px;
-    }
-
-    .card h3 { margin-bottom: 8px; font-size: 19px; }
-
-    .card p { color: var(--muted); font-size: 14px; }
-
-    .day {
-      display: inline-block;
-      margin-top: 16px;
-      color: #c5afff;
-      font-size: 13px;
-    }
-
-    .callout {
-      background: linear-gradient(120deg, #392269, #152d49);
-      border: 1px solid #ffffff18;
-      border-radius: 22px;
-      padding: 35px 25px;
-      text-align: center;
-    }
-
-    .callout p {
-      color: #e1dcf4;
-      margin: 10px auto 22px;
-      max-width: 550px;
-    }
-
-    footer {
-      text-align: center;
-      border-top: 1px solid #ffffff12;
-      padding: 28px 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      .nav-links { gap: 12px; font-size: 12px; }
-      .grid { grid-template-columns: 1fr; }
-      .hero { padding: 60px 0 50px; }
-      .stats { gap: 8px; }
-      .stat strong { font-size: 21px; }
-      .secondary { margin: 10px 0 0; }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="تعلم التصميم الغرافيكي في 30 يوم بالدارجة التونسية">
+<title>Arbi Design Lab — تعلّم الجرافيك في 30 يوم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f6fb;--card:#fff;--ink:#171a2b;--muted:#666b80;--line:#e2e5ef;--p:#5b5ce2;--soft:#eeeeff;--good:#16865e}
+:root[data-theme=dark]{--bg:#0e1120;--card:#191d30;--ink:#f5f5ff;--muted:#b5bad0;--line:#30364f;--p:#a3a4ff;--soft:#29294b;--good:#54d8a4;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.85 "Readex Pro",sans-serif}a{color:var(--p)}button,input,select{font:inherit}.wrap{width:min(1100px,calc(100% - 28px));margin:auto}.header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0;gap:12px}.brand{font-weight:800;text-decoration:none;color:var(--ink);font-size:1.1rem}.logo{display:inline-grid;place-items:center;background:linear-gradient(130deg,#5b5ce2,#c026d3);color:#fff;border-radius:12px;width:38px;height:38px;margin-left:7px}.navlinks{display:flex;gap:16px}.navlinks a{text-decoration:none;color:var(--muted);font-size:.9rem}.btn{border:1px solid var(--line);border-radius:12px;padding:9px 14px;background:var(--card);color:var(--ink);text-decoration:none;cursor:pointer}.primary{background:var(--p);border-color:var(--p);color:#fff}.softbtn{background:var(--soft);color:var(--p);border-color:transparent}.hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:28px;padding:48px 0 24px}.pill,.tag{display:inline-block;background:var(--soft);color:var(--p);border-radius:99px;padding:4px 11px;font-size:.8rem;font-weight:700}.hero h1{font:700 clamp(2rem,5vw,3.5rem)/1.3 "Reem Kufi",sans-serif;margin:15px 0}.gradient{color:var(--p)}.lead{color:var(--muted);font-size:1.05rem}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.heroimg{height:300px;border-radius:24px;overflow:hidden;background:var(--soft)}.heroimg img{width:100%;height:100%;object-fit:cover}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0 40px}.stat,.progress,.lesson,.feature,.resource{background:var(--card);border:1px solid var(--line);border-radius:17px}.stat{text-align:center;padding:12px}.stat b{display:block;font-size:1.5rem;color:var(--p)}.stat span{color:var(--muted);font-size:.85rem}section{margin:48px 0}.head{margin-bottom:18px}.head h2{font:700 clamp(1.5rem,3vw,2rem) "Reem Kufi",sans-serif;margin:0}.head p{margin:5px 0;color:var(--muted)}.progress{padding:18px}.progressrow{display:flex;justify-content:space-between;gap:10px}.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:9px 0 14px}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--p),#c026d3);transition:width .2s}.tools{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.tools input{flex:1;min-width:200px}.tools input,.tools select{padding:11px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink)}.tabs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:17px}.tab{border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--muted);padding:7px 12px;cursor:pointer}.tab.active{background:var(--p);color:white;border-color:var(--p)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.lesson{overflow:hidden;display:flex;flex-direction:column}.thumb{height:150px;position:relative;background:var(--soft)}.thumb img{width:100%;height:100%;object-fit:cover}.day{position:absolute;top:9px;right:9px;background:white;color:#222;padding:3px 9px;border-radius:8px;font-size:.8rem;font-weight:700}.done{position:absolute;top:9px;left:9px;background:#16865e;color:white;padding:3px 8px;border-radius:8px;font-size:.75rem}.lc{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}.lc h3{font-size:1.05rem;margin:0}.lc p{color:var(--muted);font-size:.9rem;margin:0}.lcfoot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:8px}.read{border:0;background:none;color:var(--p);font-weight:700;cursor:pointer}.empty{padding:30px;text-align:center;color:var(--muted)}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.feature{padding:17px}.feature b{font-size:1.15rem}.feature p{color:var(--muted);margin-bottom:0}.resources{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.resource{padding:14px;display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}.resicon{font-size:1.5rem;background:var(--soft);border-radius:12px;padding:6px}.resource small{display:block;color:var(--muted)}.callout{background:linear-gradient(120deg,#29265d,#5b5ce2);color:#fff;border-radius:20px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:15px}.callout p{color:#e0e1ff;margin:4px 0}.callout .btn{background:white;color:#29265d}.faq details{border-bottom:1px solid var(--line);padding:13px 0}.faq summary{font-weight:700;cursor:pointer}.faq p{color:var(--muted)}footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.85rem;display:flex;justify-content:space-between;flex-wrap:wrap}.modal{display:none;position:fixed;inset:0;z-index:20;background:#060817bb;padding:16px;overflow:auto;align-items:flex-start;justify-content:center}.modal.open{display:flex}.mbox{width:min(780px,100%);background:var(--card);border-radius:20px;overflow:hidden;margin:auto}.mhero{height:210px;position:relative}.mhero img{width:100%;height:100%;object-fit:cover}.close{position:absolute;top:10px;left:10px;border:0;border-radius:50%;width:40px;height:40px;font-size:1.5rem;cursor:pointer}.mbody{padding:22px}.mbody h2{font:700 1.8rem "Reem Kufi",sans-serif;margin:8px 0}.mbody h3{margin:22px 0 5px}.mbody p{color:var(--muted)}.mbody li{margin:6px 0}.tip,.quiz{padding:14px;border-radius:13px;background:var(--soft)}.quiz{margin-top:20px}.quiz label{display:block;padding:5px;cursor:pointer}.quizout{font-weight:700}.mactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.heroimg{height:220px}.grid{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}.features{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid,.features,.resources{grid-template-columns:1fr}.thumb{height:180px}.stats{gap:6px}.stat{padding:8px 3px}.stat b{font-size:1.25rem}.callout{align-items:flex-start;flex-direction:column}.mhero{height:165px}}
+</style>
 </head>
-
 <body>
-  <header>
-    <nav class="container">
-      <a class="logo" href="#">ARBI<span>.</span> DESIGN</a>
-      <div class="nav-links">
-        <a href="#home">الرئيسية</a>
-        <a href="#course">الدروس</a>
-        <a href="#about">على الموقع</a>
-      </div>
-    </nav>
-  </header>
+<header class="header"><div class="wrap nav"><a class="brand" href="#top"><span class="logo">A</span>Arbi <span class="gradient">Design Lab</span></a><nav class="navlinks"><a href="#lessons">الدروس</a><a href="#method">طريقة التعلّم</a><a href="#resources">روابط</a></nav><button class="btn" id="theme">🌙 الوضع</button></div></header>
+<main class="wrap" id="top">
+<section class="hero"><div><span class="pill">✨ تعلّم بالتطبيق موش بالحفظ</span><h1>تعلّم <span class="gradient">التصميم الغرافيكي</span><br>في 30 يوم</h1><p class="lead">من الصفر وبالدارجة التونسية. كل نهار درس، شرح خطوة بخطوة، تمرين تطبّقو بيدك، وروابط تساعدك تتقدّم.</p><div class="actions"><a class="btn primary" href="#lessons">🚀 ابدأ أوّل درس</a><a class="btn" href="#resources">🔗 الأدوات المجانية</a></div></div><div class="heroimg"><img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1000&q=85" alt="أدوات تصميم وألوان"></div></section>
+<div class="stats"><div class="stat"><b>30</b><span>درس تطبيقي</span></div><div class="stat"><b>4</b><span>مراحل تعلّم</span></div><div class="stat"><b>30–60</b><span>دقيقة كل نهار</span></div></div>
+<section><div class="head"><h2>📈 تقدّمك في التحدّي</h2><p>علّم على الدروس اللي كمّلتهم؛ التقدّم يتحفظ في نفس الجهاز.</p></div><div class="progress"><div class="progressrow"><b id="proglabel">0 من 30 درس</b><span id="progpercent">0%</span></div><div class="bar"><div class="fill" id="fill"></div></div><button class="btn softbtn" id="continue">كمّل تعلّمك ←</button> <button class="btn" id="reset">إعادة التقدّم</button></div></section>
+<section id="lessons"><div class="head"><h2>📚 مكتبة الدروس</h2><p>افتح الدرس، اقرا الشرح، طبّق التمرين، وبعد اختبر روحك.</p></div><div class="tools"><input id="search" type="search" placeholder="قلّب: ألوان، لوغو، بوستر..."><select id="week"><option value="all">كل الأسابيع</option><option value="1">الأسبوع 1: الأساسيات</option><option value="2">الأسبوع 2: التركيب</option><option value="3">الأسبوع 3: الهوية</option><option value="4">الأسبوع 4: البورتفوليو</option></select></div><div class="tabs" id="tabs"><button class="tab active" data-week="all">الكل</button><button class="tab" data-week="1">1 · الأساسيات</button><button class="tab" data-week="2">2 · التركيب</button><button class="tab" data-week="3">3 · الهوية</button><button class="tab" data-week="4">4 · البورتفوليو</button></div><div class="grid" id="grid"></div><div class="empty" id="empty" hidden>ما لقيناش درس بالكلمات هاذم. جرّب كلمة أخرى.</div></section>
+<section id="method"><div class="head"><h2>🧠 كيفاش تتعلّم بطريقة صحيحة؟</h2><p>التفرّج وحدو ما يكفيش؛ لازم تطبيق ومراجعة.</p></div><div class="features"><div class="feature"><b>👀 1. لاحظ</b><p>حلّل تصميم ناجح: العنوان، الألوان، الصورة والمسافات.</p></div><div class="feature"><b>✍️ 2. طبّق</b><p>اعمل التمرين حتى كان أول نسخة موش كاملة، وبعد حسّنها.</p></div><div class="feature"><b>🔁 3. راجع</b><p>قارن قبل وبعد، واحتفظ بأعمالك باش تشوف تطوّرك.</p></div></div></section>
+<section id="resources"><div class="head"><h2>🔗 أدوات وروابط مفيدة</h2><p>ابدأ بالنسخ المجانية؛ بعض الأدوات فيها خصائص مدفوعة.</p></div><div class="resources">
+<a class="resource" href="https://www.canva.com/" target="_blank" rel="noopener"><span class="resicon">🎨</span><span><b>Canva</b><small>تصميم بوسترات ومنشورات بسهولة</small></span></a>
+<a class="resource" href="https://www.figma.com/" target="_blank" rel="noopener"><span class="resicon">🧩</span><span><b>Figma</b><small>تصميم واجهات وتجربة المستخدم</small></span></a>
+<a class="resource" href="https://fonts.google.com/" target="_blank" rel="noopener"><span class="resicon">🔤</span><span><b>Google Fonts</b><small>خطوط مجانية لمشاريعك</small></span></a>
+<a class="resource" href="https://color.adobe.com/" target="_blank" rel="noopener"><span class="resicon">🌈</span><span><b>Adobe Color</b><small>اكتشاف مجموعات ألوان متناسقة</small></span></a>
+<a class="resource" href="https://unsplash.com/" target="_blank" rel="noopener"><span class="resicon">📷</span><span><b>Unsplash</b><small>صور للإلهام والتصميم</small></span></a>
+<a class="resource" href="https://www.behance.net/" target="_blank" rel="noopener"><span class="resicon">🖼️</span><span><b>Behance</b><small>عرض الأعمال واكتشاف المصممين</small></span></a>
+<a class="resource" href="https://www.photopea.com/" target="_blank" rel="noopener"><span class="resicon">✂️</span><span><b>Photopea</b><small>تعديل الصور من المتصفح</small></span></a>
+<a class="resource" href="https://www.remove.bg/" target="_blank" rel="noopener"><span class="resicon">🪄</span><span><b>Remove.bg</b><small>إزالة خلفية الصور</small></span></a>
+</div></section>
+<section><div class="callout"><div><h2>🎯 هدفك في اليوم 30</h2><p>مشروع صغير فيه لوغو، ألوان، بوسترات، وحزمة منشورات متناسقة.</p></div><a class="btn" href="#lessons">ابدأ التحدّي</a></div></section>
+<section class="faq"><div class="head"><h2>❓ أسئلة تتعاود</h2></div><details><summary>نجم نتعلّم بالتليفون؟</summary><p>إي، تنجم تبدأ بـCanva وPhotopea من المتصفح، وبعد تتقدّم لأدوات أخرى.</p></details><details><summary>لازم نخلّص؟</summary><p>لا، تنجم تبدأ بأدوات مجانية. بعض الخصائص الإضافية فقط مدفوعة.</p></details><details><summary>قدّاش نخصّص وقت؟</summary><p>30 إلى 60 دقيقة يوميًا تكفي للبداية، المهم تواصل وتطبّق.</p></details></section>
+</main><footer class="wrap"><span>© <span id="year"></span> Arbi Design Lab · تونس</span><a href="#top">ارجع للفوق ↑</a></footer>
+<div class="modal" id="modal" role="dialog" aria-modal="true"><article class="mbox"><div class="mhero"><img id="mimg" alt="صورة الدرس"><button class="close" id="close" aria-label="إغلاق">×</button></div><div class="mbody" id="mbody"></div></article></div>
+<script>
+  const raw=[
+["حلّل 3 بوسترات","الملاحظة","تعلّم تقرا التصميم قبل ما تبدأ تصمّم.","الفكرة الأساسية لازم توصل بسرعة. لاحظ العنوان، الألوان، الصورة، المسافات، وشنوّة أول حاجة تشوفها عينك.",["اختار 3 بوسترات من Behance أو Canva.","اكتب الفكرة الأساسية لكل بوستر في جملة.","حدّد أكبر عنصر، لونين أساسيين ونوع الخط.","جرّب تقرا العنوان في ثانيتين.","قارن بين الواضح والمزدحم."],"اعمل صفحة فيها 3 بوسترات وتحت كل واحد 3 ملاحظات.","إذا كل شيء بارز، ما عاد حتى شيء بارز.","شنوّة أهم سؤال على بوستر؟",["هل فيه برشا ألوان؟","هل الفكرة واضحة بسرعة؟","هل كل العناصر كبار؟"],1,"https://www.behance.net/"],
+["اختار بالوتة ألوان","الألوان","كوّن مجموعة ألوان متناسقة لمشروع واحد.","اختار لون أساسي، لون مساعد، لون خلفية ولون للتأكيد. التناسق أهم من كثرة الألوان.",["اختار مشروع: قهوة، رياضة أو ملابس.","حدّد الإحساس: هدوء، طاقة، فخامة أو مرح.","اختار 3 إلى 5 ألوان.","تأكد أن النص واضح فوق الخلفية.","جرّب الألوان على بوست صغير."],"حضّر 3 بالوتات واختار الأفضل مع السبب.","استعمل Adobe Color للاستلهام، وبعد جرّب الألوان على نص حقيقي.","شنوّة يلزم قبل اختيار الألوان؟",["اختيار الإحساس والهدف","اختيار 10 ألوان","استعمال الأحمر ديما"],0,"https://color.adobe.com/"],
+["اختار خطّين","الخطوط","فرّق بين خط العنوان وخط النص.","الخط يعطي شخصية للتصميم. خط واضح للعناوين وآخر مقروء للنص يكفيو غالبًا.",["اختار خط عربي للعناوين وخط للنص.","اكتب نفس الجملة بالخطّين.","كبّر العنوان وخلي النص أصغر.","جرّب وزن عريض للعنوان وعادي للنص.","اقرا التصميم على شاشة صغيرة."],"صمّم بطاقة فيها عنوان وجملة باستعمال خطّين فقط.","تأكّد أن الخط يدعم الحروف العربية مليح.","علاش نحدّوا عدد الخطوط؟",["باش يكون التصميم أوضح","باش نعقّدوا القراءة","ما عندها حتى فائدة"],0,"https://fonts.google.com/?subset=arabic"],
+["بوست بالنص برك","التوازن","صمّم منشور قوي من غير صور.","التصميم موش لازم يكون مليان صور. حجم النص والمساحات الفارغة والتباين ينجموا يعملوا بوست قوي.",["اختار اقتباس قصير.","حط العنوان في مكان واضح.","استعمل لونين أو ثلاثة.","خلّي فراغ حول النص.","جرّب ترتيب ثاني."],"اعمل بوست اقتباس بمقاس مربع من غير صور.","المساحة الفارغة عنصر تصميم موش مساحة ضايعة.","الفراغ ينجم يعاون على؟",["توضيح الرسالة","إخفاء النص","زيادة الفوضى"],0,"https://www.canva.com/"],
+["تدرّب على المسافات","المسافات","نظّم العناصر وخلي التصميم مرتاح للعين.","المسافات الثابتة تخلي التصميم مرتب. العناصر المرتبطة تكون أقرب لبعضها من العناصر المختلفة.",["حط عنوان وفقرة وزر في تصميم.","اختار مسافة صغيرة للعناصر المرتبطة.","خلّي مسافة أكبر بين المجموعات.","قارن المسافات يمين ويسار.","نحّي الفراغات العشوائية."],"خذ تصميم قديم ونظّم المسافات فيه وقارن النسختين.","القرب يبيّن العلاقة بين العناصر.","العناصر المرتبطة تكون؟",["متباعدة برشا","قريبة من بعضها","مبعثرة"],1,"https://www.canva.com/learn/"],
+["المحاذاة","التنظيم","خلّي العناصر تتبع خطوط واضحة.","المحاذاة تعني العناصر تتبع نفس الخط أو الحافة، وهذا يعطي نظام بصري حتى في التصميم الإبداعي.",["اختار محاذاة مناسبة.","رتّب العنوان والنص على نفس الخط.","استعمل الشبكة أو خطوط المساعدة.","راجع الحواف والمسافات.","جرّب نسخة بمحاذاة مختلفة."],"صمّم بطاقة فيها عنوان ونص وصورة وجرّب محاذاتين.","ما تخلطش محاذاة عشوائية في نفس المجموعة.","شنوّة فائدة المحاذاة؟",["تنظيم العناصر","زيادة الألوان","تصغير الصور فقط"],0,"https://help.figma.com/"],
+["مراجعة قبل وبعد","مراجعة","طبّق اللي تعلمتو في تصميم واحد.","المراجعة تخلّيك تلاحظ أخطاء ما تشوفهاش وقت التصميم. ارجع للألوان والخطوط والمسافات والمحاذاة.",["اختار تصميم قديم.","قيّم الوضوح والألوان والخطوط.","اختار 3 تغييرات فقط.","نفّذ التعديلات.","اكتب شنوّة تحسّن."],"احفظ صورتين: قبل وبعد، ومعاهم 3 ملاحظات.","التطوّر يجي بالتعديلات الصغيرة المتكررة.","أفضل طريقة للمراجعة؟",["تبدّل كل شيء عشوائيًا","تحدّد مشاكل ثم تصلّحها","تحذف العمل"],1,"https://www.behance.net/"],
+["التراتيب البصري","التركيب","وجّه عين القارئ من أهم عنصر للأقل أهمية.","العنوان غالبًا أكبر، التفاصيل أصغر، والمعلومة المهمة تتشاف قبل البقية.",["اكتب 3 معلومات لازم تظهر.","رتّبهم من الأهم للأقل.","كبّر العنوان وصغّر التفاصيل.","استعمل التباين بدل تكبير كل شيء.","اسأل شخص شنوّة شاف أولًا."],"صمّم إعلان لحدث فيه عنوان وتاريخ ومكان.","إذا كل شيء بارز، ما عاد حتى شيء بارز.","إذا كل العناصر بنفس القوة؟",["الأولوية تضيع","التصميم يتحسّن ديما","العنوان يظهر وحدو"],0,"https://www.canva.com/learn/"],
+["بوست اقتباس","منشورات","حوّل جملة قصيرة لتصميم قابل للمشاركة.","بوست الاقتباس يحتاج جملة واضحة، خط مقروء وخلفية ما تنافسش النص.",["اختار اقتباس وتثبت من مصدره.","قسّم الجملة لأسطر مريحة.","اختار خلفية هادئة.","ميّز كلمة بلون مختلف.","راجع الإملاء والقراءة."],"اعمل نسختين للاقتباس نفسه: فاتحة وغامقة.","ما تنسبش كلام لشخص من غير مصدر موثوق.","شنوّة أهم حاجة؟",["وضوح النص","كثرة الزخارف","خلفية أقوى من الكلام"],0,"https://www.canva.com/"],
+["الصور والاقتصاص","الصور","اختار صورة تخدم الفكرة واقصّها بذكاء.","الصورة لازم تكون مرتبطة بالموضوع وجودتها مناسبة. الاقتصاص يحدد وين يركّز المشاهد.",["حدّد شنوّة لازم الصورة توصل.","اختار صورة واضحة.","جرّب أكثر من اقتصاص.","خلّي مكان للنص.","راجع ترخيص الصورة."],"استعمل صورة واعمل منها 3 اقتصاصات مختلفة.","راجع ترخيص الصورة قبل الاستعمال التجاري.","علاش نراجع الترخيص؟",["احترام حقوق الاستعمال","زيادة حجم الملف","تبديل الألوان"],0,"https://unsplash.com/license"],
+["بوستر لحدث","بوستر","صمّم إعلان واضح لحدث أو نشاط.","البوستر يجاوب بسرعة: شنوّة الحدث؟ وقتاش؟ وين؟ وكيفاش نشارك؟",["اختار حدث خيالي.","اكتب العنوان والتاريخ والمكان.","اختار صورة مناسبة.","رتّب المعلومات حسب الأهمية.","راجع التفاصيل."],"صمّم بوستر عمودي ونسخة مربعة.","راجع التاريخ والمكان مرتين.","المعلومات الأساسية؟",["العنوان والتاريخ والمكان","الألوان فقط","اسم المصمم فقط"],0,"https://www.canva.com/"],
+["Story عمودية","سوشيال ميديا","صمّم Story سهلة القراءة على الهاتف.","الـStory عمودية. خلي النص بعيد على الحواف وين تظهر واجهة التطبيق، واستعمل رسالة واحدة واضحة.",["ابدأ بمقاس 1080×1920.","اختار هدف واحد.","حط العنوان في منطقة آمنة.","أضف دعوة واضحة للفعل.","جرّبها على الهاتف."],"اعمل 3 Stories: تشويق، معلومة، دعوة للفعل.","خلي النص قصير لأن المشاهد يمر بسرعة.","علاش نخلي مساحة من الحواف؟",["حتى ما تغطيش الواجهة المحتوى","باش نصغّر التصميم","ما ثماش سبب"],0,"https://creators.instagram.com/"],
+["Thumbnail لفيديو","فيديو","اعمل صورة مصغّرة تشد الانتباه وتبقى واضحة.","الصورة المصغّرة تظهر صغيرة؛ استعمل كلمات قليلة، عنصر رئيسي واحد وتباين قوي.",["اختار موضوع فيديو.","اكتب عنوان من 3 إلى 5 كلمات.","اختار صورة رئيسية.","خلي الخلفية بسيطة.","صغّر التصميم للتجربة."],"اعمل صورتين مصغرتين لنفس الفيديو وقارن الوضوح.","ما تستعملش عنوان مضلّل.","شنوّة الأفضل؟",["نص طويل وصغير","عنوان قصير وعنصر واضح","عشرة عناصر"],1,"https://www.youtube.com/creators/"],
+["حسّن تصميم قديم","تحسين","استعمل قواعد التركيب لإصلاح تصميمك.","حدّد المشكلة الأساسية: عنوان ضايع، صورة مزدحمة أو ألوان متضاربة. أصلح مشكلة في كل مرة.",["اختار تصميم قديم.","حدّد 3 مشاكل.","رتّب العناصر.","حسّن التباين والفراغ.","اعمل نسخة قبل وبعد."],"حسّن تصميم واطلب من شخص يختار النسخة الأوضح.","التشخيص قبل التعديل يوفّر الوقت.","كيفاش تبدأ التحسين؟",["تبدّل كل شيء عشوائيًا","تحدّد المشاكل أولًا","تضيف مؤثرات"],1,"https://www.behance.net/"],
+["اختار فكرة البراند","الهوية","حدّد شكون البراند وشكون جمهورو وشنوّة يميّزو.","البراند موش لوغو فقط؛ هو فكرة وشخصية ووعد للجمهور. افهم المنتوج والناس قبل الألوان.",["اختار مشروع: ملابس أو قهوة أو صفحة تعليمية.","اكتب شنوّة يقدّم.","حدّد الجمهور.","اختار 3 صفات للشخصية.","اكتب علاش مختلف."],"حضّر بطاقة تعريف للبراند في صفحة واحدة.","كل ما كانت الفكرة أوضح، التصميم يولي أسهل.","البراند هو؟",["لوغو فقط","هوية وتجربة وانطباع","اسم طويل"],1,"https://www.behance.net/"],
+["5 أفكار لوغو","لوغو","استكشف أفكار مختلفة قبل الشكل النهائي.","اللوغو الناجح واضح وبسيط ويخدم بأحجام مختلفة. ارسم أفكار أولية بالقلم قبل التطبيق.",["اكتب اسم البراند وكلمات مرتبطة.","ارسم 5 أفكار صغيرة.","جرّب لوغو كتابي ورمز ومزيج.","نحّي التفاصيل الزائدة.","جرّب فكرتين بالأبيض والأسود."],"صوّر 5 رسومات واكتب ميزة وعيب لكل فكرة.","ابدأ بالأبيض والأسود قبل الألوان.","علاش نرسم أفكار قبل التنفيذ؟",["نقارن حلول مختلفة","نضيّع الوقت","نزيد تفاصيل"],0,"https://www.figma.com/"],
+["نفّذ لوغو بسيط","لوغو","حوّل أفضل فكرة إلى لوغو قابل للاستعمال.","وازن بين الرمز والاسم. لازم اللوغو يبقى واضح صغير وكبير وعلى خلفية فاتحة وغامقة.",["اختار فكرة.","نفّذها بأشكال بسيطة.","وازن الرمز والاسم.","جرّب نسخة سوداء وبيضاء.","صدّر PNG شفاف إذا متاح."],"اعمل نسخة ملونة وأخرى أحادية اللون.","تجنب التفاصيل الدقيقة اللي تختفي كي يصغر اللوغو.","اختبار مهم للوغو؟",["يبقى واضح بأحجام مختلفة","فيه 7 ألوان","فيه جملة طويلة"],0,"https://www.figma.com/"],
+["ألوان وخطوط البراند","هوية بصرية","ثبّت قواعد بصرية تتعاود في كل منشوراتك.","الهوية المتناسقة تخلي الناس تتعرف على البراند. ثبّت الألوان والخطوط وطريقة الصور.",["اختار 3 إلى 5 ألوان.","حدّد خط للعناوين وخط للنص.","اكتب أكواد الألوان.","حدّد أسلوب الصور والأيقونات.","اعمل صفحة مرجعية."],"حضّر Mini Brand Guide من صفحة واحدة.","التناسق أهم من تغيير الستايل كل مرة.","علاش نعمل دليل هوية؟",["باش التصاميم تبقى متناسقة","باش كل بوست يختلف","باش نمنع الصور"],0,"https://color.adobe.com/"],
+["بطاقة زيارة","تطبيق عملي","طبّق الهوية على بطاقة فيها معلومات واضحة.","البطاقة صغيرة؛ حط المعلومات الضرورية فقط: الاسم، وسيلة تواصل وحساب إذا يلزم.",["اختار مقاس بطاقة.","حط اللوغو والاسم.","أضف وسيلة تواصل.","راجع الخط والتباين.","اترك هوامش للطباعة."],"صمّم الوجه الأمامي والخلفي للبطاقة.","ما تصغّرش الخط لدرجة يصعب قراءته.","الأولوية في البطاقة؟",["معلومات ضرورية مقروءة","الزخرفة","أكبر عدد ألوان"],0,"https://www.canva.com/"],
+["بوست بنفس الهوية","تناسق","صمّم منشور جديد باستعمال قواعد البراند.","موش لازم كل منشور نسخة طبق الأصل. حافظ على الألوان والخطوط وبعض العناصر الثابتة وبدّل المحتوى.",["افتح دليل الهوية.","اختار موضوع منشور.","استعمل الألوان والخطوط المحددة.","جدّد التركيب من غير كسر الهوية.","قارن المنشور ببقية العناصر."],"اعمل منشورين مختلفين بنفس الهوية.","الثبات ما يعنيش الملل.","كيفاش تحافظ على الهوية؟",["نفس القواعد البصرية","نفس الصورة ديما","تبديل الخطوط كل مرة"],0,"https://www.canva.com/"],
+["مراجعة الهوية","مراجعة","اختبر وضوح الهوية في تطبيقات مختلفة.","حط اللوغو والبوست والبطاقة جنب بعضهم واسأل إذا الألوان والخطوط والشخصية متناسقة.",["اجمع اللوغو والبوست والبطاقة.","راجع الألوان والخطوط.","جرّب خلفية فاتحة وغامقة.","اسأل شخص على الانطباع.","اكتب 3 تعديلات."],"اعمل لوحة عرض للهوية كاملة.","التناسق لازم يخدم وضوح البراند.","شنوّة تراجع؟",["التناسق والوضوح","عدد الملفات فقط","اسم المصمم"],0,"https://www.behance.net/"],
+["مشروع اللوغو","البورتفوليو","اعرض مراحل التفكير من الفكرة للنتيجة.","في عرض المشروع، ورّي الفكرة والاسكتشات والألوان والخطوط والنسخ المختلفة.",["نظّم الاسكتشات والنسخة النهائية.","اكتب وصف الفكرة.","اعرض الألوان والخطوط.","ورّي اللوغو على خلفيات مختلفة.","صدّر صور واضحة."],"حضّر 3 إلى 5 شرائح لمشروع اللوغو.","ما تنسبش عمل غيرك لنفسك.","شنوّة يقوّي عرض المشروع؟",["شرح الفكرة والمراحل","إخفاء كل النسخ الأولية","كلام بلا صور"],0,"https://www.behance.net/"],
+["مجموعة بوسترات","مشروع","اعمل سلسلة تصاميم تخدم نفس الحملة.","السلسلة عندها فكرة وهوية ثابتة، لكن كل بوستر يقدّم معلومة مختلفة.",["اختار حملة خيالية.","حدّد 3 رسائل.","استعمل نفس الألوان والخطوط.","بدّل الصورة أو التركيب حسب الرسالة.","اعرضهم جنب بعضهم."],"صمّم 3 بوسترات للحملة نفسها.","كي يتحطوا جنب بعضهم يلزم يبانوا من نفس العائلة.","شنوّة يجمع السلسلة؟",["هوية مشتركة","نفس النص حرفيًا","ألوان عشوائية"],0,"https://www.behance.net/"],
+["حزمة سوشيال ميديا","محتوى رقمي","جهّز منشورات وStories متناسقة للبراند.","الحزمة تنجم تشمل بوست مربع وStory وغلاف فيديو. كل واحد عنده مقاس مختلف والهوية ثابتة.",["اختار 3 أنواع محتوى.","حضّر المقاسات.","طبّق دليل الهوية.","راجع النص في كل مقاس.","صدّر بأسماء واضحة."],"اعمل حزمة من 3 تصاميم لنفس البراند.","ما تستعملش نفس الترتيب في كل مقاس من غير تعديل.","علاش نعدّل حسب المقاس؟",["كل مساحة عندها عرض مختلف","باش نبدل الهوية","ما يلزمش"],0,"https://www.canva.com/"],
+["اعرض التصميم في Mockup","عرض الأعمال","ورّي كيفاش التصميم يظهر في استعمال واقعي.","الـMockup يوري التصميم على بطاقة أو شاشة أو تغليف؛ يعاون على تخيّل استعماله لكنه ما يعوّضش جودة التصميم.",["اختار Mockup مناسب.","ركّب التصميم.","راجع المنظور والحجم.","ما تخليش المؤثرات تغطي التصميم.","راجع شروط استعمال النموذج."],"اعمل صورة عرض للوغو على بطاقة أو شاشة.","استعمل Mockups عندك الحق في استعمالها.","شنوّة دور Mockup؟",["يوضح الاستعمال الواقعي","يعوّض جودة التصميم","يضيف معلومات كاذبة"],0,"https://www.mockupworld.co/"],
+["أنشئ Portfolio","عرض أعمال","اجمع أفضل مشاريعك في مكان واحد.","ابدأ بثلاثة مشاريع واضحة. كل مشروع فيه الهدف والفكرة والنتيجة ودورك فيه.",["اختار أفضل 3 مشاريع.","رتّبهم من الأقوى.","اكتب وصف قصير.","استعمل صور واضحة.","راجع الروابط والتواصل."],"حضّر صفحة Portfolio أو مشروع على Behance.","الجودة والشرح أهم من عدد المشاريع.","أفضل بداية للبورتفوليو؟",["3 مشاريع قوية ومشروحة","صور كثيرة بلا تفسير","أعمال منسوخة"],0,"https://www.behance.net/"],
+["انشر مشروعك","النشر","قدّم شغلك للناس بطريقة مرتبة.","قدّم الفكرة وشنوّة تعلّمت وشنوّة تحب تطوّر. وضّح إذا المشروع تدريبي أو خيالي.",["اكتب اسم المشروع وهدفه.","اختار أفضل صور.","اكتب وصف مختصر.","أضف رابط البورتفوليو.","اطلب ملاحظات محددة."],"حضّر نص تقديم من 3 إلى 5 جمل.","الشفافية تبني الثقة.","كيفاش تقدّم مشروع تدريبي؟",["تقول إنه تدريبي بوضوح","تدّعي أنه لعميل","ما تفسر شيء"],0,"https://www.behance.net/"],
+["فيديو قصير للتصميم","Motion","حوّل التصميم إلى فيديو بسيط ومتحرك.","الحركة تشد الانتباه لكن كثرتها تشتّت. ابدأ بظهور العنوان ثم الصورة ثم الدعوة للفعل.",["اختار بوستر.","حدّد ترتيب ظهور العناصر.","استعمل حركة أو اثنتين.","خلّي النص ظاهر وقت كافي.","صدّر الفيديو وجرّبه."],"اعمل فيديو من 5 إلى 8 ثواني من تصميم ثابت.","الحركة تخدم الفكرة موش تستعرض المؤثرات.","أفضل استعمال للحركة؟",["توجيه الانتباه","تحريك كل شيء","إخفاء العنوان"],0,"https://www.capcut.com/"],
+["اجمع آراء الناس","تطوير","استعمل الملاحظات لتحسين مشروعك.","الملاحظات المتكررة تستحق التجربة. اسأل أسئلة محددة بدل سؤال عام مثل يعجبك؟",["اعرض التصميم على 3 أشخاص.","اسأل شنوّة فهموا أولًا.","اسأل إذا القراءة صعيبة.","دوّن الملاحظات المتكررة.","جرّب تعديلًا وقارن."],"اكتب 3 ملاحظات وشنوّة باش تبدّل.","النقد معلومة للتحسين موش حكم عليك.","شنوّة الملاحظة الأكثر فائدة؟",["العنوان موش واضح على الهاتف","ما عجبنيش وخلاص","بدّل كل شيء"],0,"https://www.behance.net/"],
+["خطة الشهر الجاي","الخطوة التالية","راجع رحلتك وحدّد مهارة جديدة.","بعد 30 يوم اختار مجال تحب تتعمّق فيه: الهوية، السوشيال ميديا، الصور أو تصميم الواجهات.",["راجع كل الأعمال.","حدّد أقوى وأضعف مهارة.","اختار مجال للشهر القادم.","حدّد مشروع وموعد لإنهائه.","راجع تقدمك كل أسبوع."],"اكتب خطة 4 أسابيع فيها هدف ومشروع واحد على الأقل.","ما تستعجلش الربح؛ ابنِ مهارتك وأعمالك.","شنوّة تعمل بعد التحدّي؟",["توقف نهائيًا","تختار هدف جديد وتواصل","تنسى أعمالك"],1,"https://www.behance.net/"]
+];
+  const lessons=raw.map((r,i)=>({d:i+1,w:Math.min(4,Math.ceil((i+1)/7)),t:r[0],tag:r[1],desc:r[2],explain:r[3],steps:r[4],task:r[5],tip:r[6],quiz:r[7],opts:r[8],correct:r[9],link:r[10]}));
+const photoIds=["photo-1541701494587-cb58502866ab","photo-1507908708918-778587c9e563","photo-1455390582262-044cdead277a","photo-1499951360447-b19be8fe80f5","photo-1497366754035-f200968a6e72","photo-1454165804606-c3d57bc86b40","photo-1558655146-d09347e92766","photo-1558655146-9f40138edfeb","photo-1634942536790-253d9f4b7a4b","photo-1589330694653-ded6df03f754","photo-1611162617474-5b21e879e113","photo-1611162616475-46b635cb6868"];
+const img=l=>`https://images.unsplash.com/${photoIds[(l.d-1)%photoIds.length]}?auto=format&fit=crop&w=900&q=80`;
+let weekFilter="all",done=new Set(JSON.parse(localStorage.getItem("arbiDone")||"[]"));
+const grid=document.getElementById("grid");
 
-  <main>
-    <section class="hero" id="home">
-      <div class="container">
-        <span class="tag">✦ تعلّم التصميم من الصفر</span>
+function render(){
+ let q=document.getElementById("search").value.toLowerCase().trim();
+ let w=document.getElementById("week").value;
+ let arr=lessons.filter(l=>(weekFilter==="all"||String(l.w)===weekFilter)&&(w==="all"||String(l.w)===w)&&`${l.t} ${l.tag} ${l.desc} ${l.explain}`.toLowerCase().includes(q));
+ grid.innerHTML=arr.map(l=>`<article class="lesson"><div class="thumb"><img loading="lazy" src="${img(l)}" alt="صورة توضيحية لدرس ${l.t}"><span class="day">اليوم ${l.d}</span>${done.has(l.d)?'<span class="done">✓ كمّلت</span>':''}</div><div class="lc"><span class="tag">الأسبوع ${l.w} · ${l.tag}</span><h3>${l.t}</h3><p>${l.desc}</p><div class="lcfoot"><small>${l.d<=7?"الأساسيات":l.d<=14?"التركيب":l.d<=21?"الهوية":"البورتفوليو"}</small><button class="read" onclick="openLesson(${l.d})">اقرا الدرس ←</button></div></div></article>`).join("");
+ document.getElementById("empty").hidden=arr.length>0;
+}
 
-        <h1>
-          تعلّم الـ Graphic Design<br>
-          <span class="gradient">في 30 يوم فقط</span>
-        </h1>
+function progress(){
+ let n=done.size,p=Math.round(n/30*100);
+ document.getElementById("proglabel").textContent=`${n} من 30 درس`;
+ document.getElementById("progpercent").textContent=p+"%";
+ document.getElementById("fill").style.width=p+"%";
+ localStorage.setItem("arbiDone",JSON.stringify([...done]));
+ render();
+}
 
-        <p>
-          ابدأ رحلتك في عالم التصميم خطوة بخطوة.
-          تعلّم الأساسيات، طوّر ذوقك، واصنع أول أعمالك
-          حتى كان ما عندك حتى تجربة سابقة.
-        </p>
+function openLesson(d){
+ let l=lessons[d-1];
+ document.getElementById("mimg").src=img(l);
+ document.getElementById("mbody").innerHTML=`<span class="tag">اليوم ${l.d} · الأسبوع ${l.w} · ${l.tag}</span><h2>${l.t}</h2><p>${l.desc}</p><h3>🎯 الهدف</h3><p>في آخر الدرس يلزمك تكون قادر: ${l.desc}</p><h3>📖 الشرح</h3><p>${l.explain}</p><h3>🪜 خطوات التطبيق</h3><ol>${l.steps.map(s=>`<li>${s}</li>`).join("")}</ol><h3>✍️ التمرين</h3><p>${l.task}</p><p class="tip">💡 نصيحة: ${l.tip}</p><h3>🔗 رابط مفيد</h3><p><a href="${l.link}" target="_blank" rel="noopener">${l.link} ↗</a></p><div class="quiz"><b>🧠 اختبر روحك</b><p>${l.quiz}</p>${l.opts.map((o,i)=>`<label><input type="radio" name="q${d}" value="${i}"> ${o}</label>`).join("")}<button class="btn softbtn" onclick="check(${d})">تثبّت من الإجابة</button><p class="quizout" id="out"></p></div><div class="mactions"><button class="btn primary" onclick="toggleDone(${d})">${done.has(d)?"✓ كمّلت الدرس — إلغاء":"علّم الدرس كمكمّل ✓"}</button><button class="btn" onclick="openLesson(${d===30?1:d+1})">الدرس التالي ←</button></div>`;
+ document.getElementById("modal").classList.add("open");
+ document.body.style.overflow="hidden";
+}
 
-        <a href="#course" class="btn">🚀 ابدأ التعلّم</a>
-        <a href="#about" class="btn secondary">اكتشف الموقع</a>
+function check(d){
+ let l=lessons[d-1],v=document.querySelector(`input[name="q${d}"]:checked`),o=document.getElementById("out");
+ if(!v){o.textContent="اختار إجابة قبل.";return}
+ let ok=+v.value===l.correct;
+ o.textContent=ok?"صحيح! برافو 👏":"موش بالضبط. عاود راجع شرح الدرس.";
+ o.style.color=ok?"var(--good)":"#d97706";
+}
 
-        <div class="stats">
-          <div class="stat">
-            <strong>30</strong>
-            <span>يوم تعلّم</span>
-          </div>
-          <div class="stat">
-            <strong>4</strong>
-            <span>مراحل</span>
-          </div>
-          <div class="stat">
-            <strong>1</strong>
-            <span>مشروع نهائي</span>
-          </div>
-        </div>
-      </div>
-    </section>
+function toggleDone(d){
+ done.has(d)?done.delete(d):done.add(d);
+ progress();
+ openLesson(d);
+}
 
-    <section id="course">
-      <div class="container">
-        <div class="section-head">
-          <h2>رحلتك تبدأ <span class="gradient">من هنا</span></h2>
-          <p>اختار المرحلة اللي تحب تتعلّمها</p>
-        </div>
+function close(){
+ document.getElementById("modal").classList.remove("open");
+ document.body.style.overflow="";
+}
 
-        <div class="grid">
-          <article class="card">
-            <div class="icon">🎨</div>
-            <h3>01 — أساسيات التصميم</h3>
-            <p>تعرّف على الألوان، الخطوط، الأشكال ومبادئ التصميم البصري.</p>
-            <span class="day">الأيام 1 – 7</span>
-          </article>
+document.getElementById("close").onclick=close;
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")close()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
 
-          <article class="card">
-            <div class="icon">🧩</div>
-            <h3>02 — التركيب البصري</h3>
-            <p>تعلّم كيفاش ترتّب العناصر وتعمل تصاميم واضحة ومتناسقة.</p>
-            <span class="day">الأيام 8 – 14</span>
-          </article>
+document.getElementById("search").oninput=render;
+document.getElementById("week").onchange=e=>{
+ weekFilter=e.target.value;
+ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.week===weekFilter));
+ render();
+};
 
-          <article class="card">
-            <div class="icon">✨</div>
-            <h3>03 — الهوية واللوغو</h3>
-            <p>اكتشف عالم الشعارات، الألوان التجارية والهوية البصرية.</p>
-            <span class="day">الأيام 15 – 21</span>
-          </article>
+document.getElementById("tabs").onclick=e=>{
+ let b=e.target.closest(".tab");
+ if(!b)return;
+ weekFilter=b.dataset.week;
+ document.getElementById("week").value=weekFilter;
+ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===b));
+ render();
+};
 
-          <article class="card">
-            <div class="icon">💼</div>
-            <h3>04 — مشروعك النهائي</h3>
-            <p>طبّق اللي تعلّمته وحضّر مشروعك الأول للـ Portfolio.</p>
-            <span class="day">الأيام 22 – 30</span>
-          </article>
-        </div>
-      </div>
-    </section>
+document.getElementById("continue").onclick=()=>{
+ let l=lessons.find(x=>!done.has(x.d));
+ if(l)openLesson(l.d);
+ else document.getElementById("lessons").scrollIntoView();
+};
 
-    <section id="about">
-      <div class="container">
-        <div class="callout">
-          <h2>كل مصمّم محترف <span class="gradient">كان مبتدئ</span></h2>
-          <p>
-            ما تستناش حتى تولّي محترف باش تبدأ.
-            تعلّم كل يوم، طبّق بيدك، وطوّر مستواك خطوة بخطوة.
-          </p>
-          <a href="#course" class="btn">نبدأ اليوم ✦</a>
-        </div>
-      </div>
-    </section>
-  </main>
+document.getElementById("reset").onclick=()=>{
+ if(confirm("متأكد تحب تمسح التقدّم الكل؟")){
+  done.clear();
+  progress();
+ }
+};
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Arbi Design — تعلّم، طبّق، وابدع.</p>
-    </div>
-  </footer>
-</body>
-</html>
+document.getElementById("theme").onclick=()=>{
+ let dark=document.documentElement.dataset.theme!=="dark";
+ document.documentElement.dataset.theme=dark?"dark":"light";
+ localStorage.setItem("arbiTheme",dark?"dark":"light");
+ document.getElementById("theme").textContent=dark?"☀️ الوضع":"🌙 الوضع";
+};
+
+let theme=localStorage.getItem("arbiTheme");
+if(theme){
+ document.documentElement.dataset.theme=theme;
+ document.getElementById("theme").textContent=theme==="dark"?"☀️ الوضع":"🌙 الوضع";
+}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+render();
+progress();
+</script></body></html>
